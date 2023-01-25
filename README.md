@@ -3,66 +3,63 @@ En este apartado se encontrarán 7 apartados donde la finalidad es tener una est
 Ellos son: regresión, clasificación multiple, clasificación binaria, time series, clusterización, NLP. Sumado a esto, sumaremos un glosario de conceptos y nuevos conceptos a investigar. Y un apartado de problemas comúnes y como solucionarlos
 
 
-# REGRESION (cashflow abastecimiento, beelo porcentaje de incapacidad )
-    # EXPLORACIÓN: 
-            # variables continuas: #max, min, media, desvio, distribuciones, percentiles, outliers, nulos, histogramas
-            # variables discretas: distribuciones, moda, outliers, nulos
-            # relacion entre variables: heatmap correlación, clusterings
-    # PROCESAMIENTOS Y FEATURE ENGINEERING: split train test estratificado,Reducción de dimensionalidad (Algorithsms: PCA, SVD, LDA)
-    # MODELOS, ENSAMBES Y SUS PARAMETROS: decisiontreeregressor,randomforestregressor, 
-    # AJUSTES POST ENTRENAMIENTO: gridsearch
+EXPLORACIÓN y PREPARACIÓN DE DATOS Y FEATURE ENGINEERING (universal) 
+# PROBLEMAS COMUNES DE PREPARACIÓN DE DATOS
+- variables con alta cardinalidad (valores únicos)
+- Muchas features con altos porcentajes de null
+- No hay label para un dataset grande: clustering, generar pequeño modelo y que despues clasifique, por transferecnia como zero-shot en NLP.
+- El Label de los datos, es múltiple, tiene un % de precisión, o solo se refiere a un pedazo
+- Desbalance de sample (afecta a train test), correlacion de variables y ruidos, split de dataset
+- Dataset chico: modelos simples, ojo outliers, selectivo con los features, ensamble de modelos debiles, SMOTE 
+ 
+
+
+
+# REGRESION (beelo porcentaje de incapacidad)
+    # MODELADO( parametros, hiperparametros, modelo/ensamble):decisiontreeregressor,randomforestregressor, 
+    # OPTIMIZADOR DE PARAMETROS: gridsearch,RandomizedSearchCV
+    # AJUSTES POST ENTRENAMIENTO: 
     # EVALUACIÓN Y METRICAS: absoluto medio (MAE), el error cuadrático medio (MSE) y el coeficiente de determinación (R ^ 2)
-    # PROBLEMAS COMUNES
+    # OTRAS HERRAMIENTAS: LIME para explicación
     
 # CLASIFICACIÓN MULTIPLE (tematicas efecty)
-    # EXPLORACIÓN
-    # PROCESAMIENTOS Y FEATURE ENGINEERING: split train test estratificado, Reducción de dimensionalidad Algorithsms: PCA, SVD, LDA)
-    # MODELOS, ENSAMBES Y SUS PARAMETROS: arboles de decisión (random, xboost, gradientboosting, ), redes (regr log, losso, rasso), SVM, naive bayes, k-NN
-    # AJUSTES POST ENTRENAMIENTO: gridsearch, feature importance,  curva ROC (Receiver Operating Characteristic) para selección de corte de umbral
+    # MODELADO( parametros, hiperparametros, modelo/ensamble): arboles de decisión (random, xboost, gradientboosting, ), redes (regr log, losso, rasso), SVM, naive bayes, k-NN
+    # OPTIMIZADOR DE PARAMETROS: gridsearch,RandomizedSearchCV
+    # AJUSTES POST ENTRENAMIENTO: feature importance,  curva ROC (Receiver Operating Characteristic) para selección de corte de umbral
     # EVALUACIÓN Y METRICAS: Curva de aprendizaje, F1-score, AUC para selección de mejor modelo, k-folding(metodo de cross-validation. k=10 es buena): permite verificar si hay overfitting si tienen mucha varianza
-    # PROBLEMAS COMUNES:
-        explicación de modelos: 	LIME. Explica clasificaciones de cualquier modelo de ML. como? Inicia generando leves perturbaciones o eliminando features de sample que se quiere explicar, y enviándolo de nuevo al modelo inicial.
+    # OTRAS HERRAMIENTAS: LIME para explicación
 
 # CLASIFICACIÓN BINARIA (calculos renales, score crediticio)
-    # EXPLORACIÓN: percentiles, histogramas
-    # PROCESAMIENTOS Y FEATURE ENGINEERING: split train test estratificado, Reducción de dimensionalidad
-    # MODELOS, ENSAMBES Y SUS PARAMETROS: arboles de decisión (random, xboost, gradientboosting, ), redes (regr log, losso, rasso), SVM, naive bayes, k-NN
-    # AJUSTES POST ENTRENAMIENTO: gridsearch, feature importance,  curva ROC (Receiver Operating Characteristic) para selección de corte de umbral,
+    # MODELADO( parametros, hiperparametros, modelo/ensamble): arboles de decisión (random, xboost, gradientboosting, ), redes (regr log, losso, rasso), SVM, naive bayes, k-NN
+    # OPTIMIZADOR DE PARAMETROS: gridsearch,RandomizedSearchCV
+    # AJUSTES POST ENTRENAMIENTO:feature importance,  curva ROC (Receiver Operating Characteristic) para selección de corte de umbral,
     # EVALUACIÓN Y METRICAS: Curva de aprendizaje, AUC para selección de modelo, confusión matrix para ver: F1-score , recall y accuracy. Curva de aprendizaje, , k-folding(metodo de cross-validation. k=10 es buena): permite verificar si hay overfitting si tienen mucha varianza
-    # PROBLEMAS COMUNES:
+    # OTRAS HERRAMIENTAS: LIME para explicación
 
-# TIME SERIES (predicción de demanda USTrading, cashflow abastecimiento)
+# TIME SERIES (predicción de demanda USTrading, cashflow abastecimiento, desabastecimiento)
     # CONCEPTOS:
         #   Componente tendencial: (hay una tendencia en aumento en gral en los últimos 10 años),
         #   Componente cíclica: (comportamientos recurrentes ciclos económicos de 2 o 10 años que se repiten),
         #   Componente estacional: ( causas climatológicas, vacacionales o fiscales, o semanales por alguna razón, menores a la anual) 
         #   Componente irregular: 
-    # EXPLORACIÓN:
-            #variables temporales: identificación de componentes tendenciales, cíclos, estacionales e irregulares
-            # variables continuas: max, min, media, desvio, distribuciones, percentiles, outliers, nulos
-            # variables discretas: histogramas, moda, outliers, nulos
-            # relacion entre variables: heatmap correlación, clusterings
-    # PROCESAMIENTOS Y FEATURE ENGINEERING: split train test estratificado,Redución de dimensionalidad
-
-    # MODELOS, ENSAMBES Y SUS PARAMETROS: modelos de regresión (), alphabet (facebook), ForecasterAutoreg,ForecasterAutoregCustom, CatBoostRegressor, ForecasterAutoregMultiOutput,
-    # AJUSTES POST ENTRENAMIENTO:gridsearch
+    # MODELADO( parametros, hiperparametros, modelo/ensamble): modelos de regresión (), alphabet (facebook), ForecasterAutoreg,ForecasterAutoregCustom, CatBoostRegressor, ForecasterAutoregMultiOutput,
+    # OPTIMIZADOR DE PARAMETROS: gridsearch,RandomizedSearchCV
     # EVALUACIÓN Y METRICAS: absoluto medio (MAE), el error cuadrático medio (MSE) y el coeficiente de determinación (R ^ 2)
-    # PROBLEMAS COMUNES:
+    # OTRAS HERRAMIENTAS: LIME para explicación
 
 # CLUSTERIZACIÓN (Ustrafing)
-    # EXPLORACIÓN:
-    # PROCESAMIENTOS Y FEATURE ENGINEERING: Reducción de dimensionalidad, split train test estratificado,
-    # MODELOS, ENSAMBES Y SUS PARAMETROS: gridsearch
+    # MODELADO( parametros, hiperparametros, modelo/ensamble): 
+    # OPTIMIZADOR DE PARAMETROS: gridsearch,RandomizedSearchCV
     # EVALUACIÓN Y METRICAS:
-    # PROBLEMAS COMUNES:
-
+    # OTRAS HERRAMIENTAS: 
 
 PATTERN SEARCH/ Search relations/ ASOCIACION (Ustrafing)
     # EXPLORACIÓN:
-    # PROCESAMIENTOS Y FEATURE ENGINEERING: Reducción de dimensionalidad, split train test estratificado,
-    # MODELOS, ENSAMBES Y SUS PARAMETROS: gridsearch
+    # PREPARACIÓN DE DATOS Y FEATURE ENGINEERING: Reducción de dimensionalidad, split train test estratificado,
+    # MODELADO( parametros, hiperparametros, modelo/ensamble): 
+    # OPTIMIZADOR DE PARAMETROS: gridsearch,RandomizedSearchCV
     # EVALUACIÓN Y METRICAS:
-    # PROBLEMAS COMUNES:
+    # OTRAS HERRAMIENTAS: 
 
 
 # NLP( efecty, santander)
@@ -81,7 +78,8 @@ PATTERN SEARCH/ Search relations/ ASOCIACION (Ustrafing)
 # DISTANCIAS ENTRE PUNTOS UTILES: cosine_pearson : 0.8280372842978689, cosine_spearman : 0.8232689765056079, euclidean_pearson : 0.81021993884437, euclidean_spearman : 0.8087904592393836, manhattan_pearson : 0.809645390126291, manhattan_spearman : 0.8077035464970413, dot_pearson : 0.7803662255836028, dot_spearman : 0.7699607641618339
 # positional encoder (solo para transformers)
     # EXPLORACIÓN: topic_modeling
-    # PROCESAMIENTOS Y FEATURE ENGINEERING
+    # PREPARACIÓN DE DATOS Y FEATURE ENGINEERING:
+    
     # MODELOS, ENSAMBES Y SUS PARAMETROS
     # EVALUACIÓN Y METRICAS
     # PROBLEMAS COMUNES
@@ -129,7 +127,7 @@ Distribuciones:
         - Pascal/Distribución binomial negativa. Cantidad de dias transcurridos 4 fallas de maquina
         - Poisson (Se especializa en la probabilidad de ocurrencia de sucesos con probabilidades muy pequeñas en el tiempo. Ej: falla en maquinas)
 
-
+hyperparametros: los parametros que no se pueden definir previamente
 
 
 
